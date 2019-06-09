@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  calendz-api-calendar:
+    container_name: calendz-api-calendar
+    hostname: calendz-api-calendar
+    build:
+      context: ../../calendz-api-calendar/
+      dockerfile: Dockerfile
+    image: calendz-api-calendar:1.0.0
+    restart: on-failure
+    volumes:
+      - ../../calendz-api-calendar:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    command: npm run dev
+
+  calendz-database:
+    container_name: calendz-database
+    hostname: calendz-database
+    image: mongo:3.6
+    restart: on-failure
+    volumes:
+      - ../mongodb/data:/data/db
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: calendz
