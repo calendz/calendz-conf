@@ -3,6 +3,8 @@ version: '3.7'
 networks:
   backend:
     driver: bridge
+  frontend:
+    driver: bridge
 
 services:
   calendz-api-calendar:
@@ -18,6 +20,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3000:3000"
+    networks: 
+      - frontend
     command: npm run dev
 
   calendz-api:
@@ -33,7 +37,8 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3001:3001"
-    networks: 
+    networks:
+      - frontend
       - backend
     depends_on:
       - calendz-database
@@ -52,3 +57,23 @@ services:
       MONGO_INITDB_DATABASE: calendz
       MONGO_INITDB_ROOT_USERNAME: username
       MONGO_INITDB_ROOT_PASSWORD: password
+
+  calendz-front:
+    container_name: calendz-front
+    hostname: calendz-front
+    build:
+      context: ../../calendz-front
+      dockerfile: Dockerfile
+    image: calendz-front:1.0.0
+    restart: on-failure
+    volumes:
+      - ../../calendz-front:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 8080:8080
+    networks: 
+      - frontend
+    depends_on:
+      - calendz-api
+      - calendz-api-calendar
+    command: npm run serve
