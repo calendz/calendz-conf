@@ -30,7 +30,7 @@ services:
     build:
       context: ../../calendz-api/
       dockerfile: Dockerfile
-    image: calendz-ap:1.0.0
+    image: calendz-api:1.0.0
     restart: on-failure
     volumes:
       - ../../calendz-api:/usr/src/app
