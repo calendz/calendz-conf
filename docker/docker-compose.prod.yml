@@ -65,7 +65,7 @@ services:
     image: calendz-front:1.0.0
     restart: on-failure
     volumes:
-      - ../../calendz-front/dist:/usr/src/app/dist
+      - ../../calendz-front:/usr/src/app
       - /usr/src/app/node_modules
     depends_on:
       - calendz-api
