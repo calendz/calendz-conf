@@ -21,6 +21,7 @@ services:
       - "3000:3000"
     networks: 
       - frontend
+      - backend
     command: npm run start
 
   calendz-api:
