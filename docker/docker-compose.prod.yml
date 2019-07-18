@@ -22,6 +22,8 @@ services:
     networks: 
       - frontend
       - backend
+    depends_on:
+      - calendz-database
     command: npm run start
 
   calendz-api:
