@@ -29,10 +29,7 @@ services:
   calendz-api:
     container_name: calendz-api
     hostname: calendz-api
-    build:
-      context: ../../calendz-api/
-      dockerfile: Dockerfile
-    image: calendz-api:1.0.0
+    image: calendz/api:latest
     restart: always
     volumes:
       - /usr/src/app/node_modules
@@ -66,7 +63,7 @@ services:
       context: ../../calendz-front
       dockerfile: Dockerfile
     image: calendz-front:1.0.0
-    restart: on-failure
+    restart: no
     volumes:
       - ../../calendz-front:/usr/src/app
       - /usr/src/app/node_modules
