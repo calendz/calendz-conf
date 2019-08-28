@@ -13,10 +13,7 @@ services:
   calendz-api-calendar:
     container_name: calendz-api-calendar
     hostname: calendz-api-calendar
-    build:
-      context: ../../calendz-api-calendar/
-      dockerfile: Dockerfile
-    image: calendz-api-calendar:1.0.0
+    image: calendz/api-calendar:latest
     restart: always
     volumes:
       - /usr/src/app/node_modules
@@ -56,10 +53,7 @@ services:
   calendz-front:
     container_name: calendz-front
     hostname: calendz-front
-    build:
-      context: ../../calendz-front
-      dockerfile: Dockerfile
-    image: calendz-front:1.0.0
+    image: calendz/front:latest
     restart: "no"
     volumes:
       - ../../calendz-front:/usr/src/app
