@@ -2,4 +2,4 @@
 mongodb/data/
 
 # compose env variables
-.env
+*.env

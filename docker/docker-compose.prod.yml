@@ -25,6 +25,7 @@ services:
     depends_on:
       - calendz-database
     command: npm run start
+    env_file: ./.api-calendar.env
 
   calendz-api:
     container_name: calendz-api
