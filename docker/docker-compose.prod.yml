@@ -63,7 +63,7 @@ services:
       context: ../../calendz-front
       dockerfile: Dockerfile
     image: calendz-front:1.0.0
-    restart: no
+    restart: "no"
     volumes:
       - ../../calendz-front:/usr/src/app
       - /usr/src/app/node_modules
