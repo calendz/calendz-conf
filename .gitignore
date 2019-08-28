@@ -1,2 +1,5 @@
 # database storage
 mongodb/data/
+
+# compose env variables
+.env

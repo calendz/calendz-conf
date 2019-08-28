@@ -41,26 +41,7 @@ services:
     depends_on:
       - calendz-database
     command: npm run start
-    env:
-      - NODE_ENV=production
-      - FRONT_URL=https://calendz.app/#/
-      - APP_PORT=3001
-      - POPULATE=false
-      - DB_HOST=calendz-database
-      - DB_PORT=27017
-      - DB_USER=username
-      - DB_PASSWORD=password
-      - COOKIE_SECRET=${COOKIE_SECRET}
-      - COOKIE_SECURE=true
-      - JWT_SECRET=${JWT_SECRET}
-      - JWT_EXPIRATION=900
-      - JWT_EXPIRATION_REFRESH=30
-      - JWT_RAW_TOKEN=${JWT_RAW_TOKEN}
-      - JWT_RAW_TOKEN=test
-      - MAILED_ENABLED=true
-      - MAILER_API_KEY=${MAILER_API_KEY}
-      - MAILER_DOMAIN=${MAILER_DOMAIN}
-      - MAILER_HOST=${MAILER_HOST}
+    env_file: ./.env
 
   calendz-database:
     container_name: calendz-database
