@@ -7,6 +7,9 @@ networks:
     driver: bridge
 
 services:
+  # =============================================  
+  # == CALENDZ-API-CALENDAR  
+  # =============================================  
   calendz-api-calendar:
     container_name: calendz-api-calendar
     hostname: calendz-api-calendar
@@ -27,6 +30,9 @@ services:
     command: npm run start
     env_file: ./.api-calendar.env
 
+  # =============================================  
+  # == CALENDZ-API  
+  # =============================================  
   calendz-api:
     container_name: calendz-api
     hostname: calendz-api
@@ -42,22 +48,11 @@ services:
     depends_on:
       - calendz-database
     command: npm run start
-    env_file: ./.env
+    env_file: ./.api.env
 
-  calendz-database:
-    container_name: calendz-database
-    hostname: calendz-database
-    image: mongo:3.6
-    restart: always
-    volumes:
-      - ../mongodb/data:/data/db
-    networks: 
-      - backend
-    environment:
-      MONGO_INITDB_DATABASE: calendz
-      MONGO_INITDB_ROOT_USERNAME: username
-      MONGO_INITDB_ROOT_PASSWORD: password
-
+  # =============================================  
+  # == CALENDZ-FRONT  
+  # =============================================  
   calendz-front:
     container_name: calendz-front
     hostname: calendz-front
@@ -73,3 +68,18 @@ services:
       - calendz-api
       - calendz-api-calendar
     command: npm run build
+    env_file: ./.front.env
+
+  # =============================================  
+  # == CALENDZ-DATABASE  
+  # =============================================      
+  calendz-database:
+    container_name: calendz-database
+    hostname: calendz-database
+    image: mongo:3.6
+    restart: always
+    volumes:
+      - ../mongodb/data:/data/db
+    networks: 
+      - backend
+    env_file: ./.database.env
