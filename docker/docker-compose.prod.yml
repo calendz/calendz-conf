@@ -77,3 +77,20 @@ services:
     networks: 
       - backend
     env_file: ./.database.env
+
+  # =============================================  
+  # == CALENDZ-NGINX
+  # =============================================
+  calendz-nginx:
+    container_name: calendz-nginx
+    hostname: calendz-nginx
+    build:
+      context: ../nginx
+      dockerfile: Dockerfile
+    image: calendz/nginx:latest
+    restart: always
+    ports:
+      - 80:80/tcp
+      - 443:443/tcp
+    environment:
+      - CERTBOT_EMAIL=dufourarthur.perso@gmail.com
