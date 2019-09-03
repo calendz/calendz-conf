@@ -90,14 +90,16 @@ services:
     image: calendz/nginx:latest
     restart: always
     volumes:
-    - ../nginx/conf:/etc/nginx/conf.d
-    - ../nginx/data/certbot/conf:/etc/letsencrypt
-    - ../nginx/data/certbot/www:/var/www/certbot
+      - ../nginx/conf:/etc/nginx/conf.d
+      - ../nginx/data/certbot/conf:/etc/letsencrypt
+      - ../nginx/data/certbot/www:/var/www/certbot
     ports:
       - "80:80"
       - "443:443"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-  certbot:
+  calendz-certbot:
+    container_name: calendz-certbot
+    hostname: calendz-certbot
     image: certbot/certbot
     restart: unless-stopped
     volumes:
