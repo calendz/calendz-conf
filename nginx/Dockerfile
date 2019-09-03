@@ -1,4 +1,2 @@
-# (cf. https://github.com/staticfloat/docker-nginx-certbot)
-FROM staticfloat/nginx-certbot
-
-COPY ./conf/*.conf /etc/nginx/conf.d/
+# (cf. https://github.com/wmnnd/nginx-certbot)
+FROM nginx:1.15-alpine
