@@ -5,7 +5,7 @@ if ! [ -x "$(command -v docker-compose)" ]; then
   exit 1
 fi
 
-domains=(calendz.app www.calendz.app api.calendz.app api-calendar.calendz.app git.calendz.app ci.calendz.app github.calendz.app)
+domains=(calendz.app www.calendz.app api.calendz.app api-calendar.calendz.app git.calendz.app github.calendz.app) # ci.calendz.app
 rsa_key_size=4096
 data_path="./nginx/data/certbot"
 email="dufourarthur.perso@gmail.com"

@@ -1,11 +1,5 @@
 version: '3.7'
 
-networks:
-  backend:
-    driver: bridge
-  frontend:
-    driver: bridge
-
 services:
   # =============================================  
   # == CALENDZ-API-CALENDAR  
@@ -19,9 +13,6 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3000:3000"
-    networks: 
-      - frontend
-      - backend
     depends_on:
       - calendz-database
     command: npm run start
@@ -39,9 +30,6 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3001:3001"
-    networks:
-      - frontend
-      - backend
     depends_on:
       - calendz-database
     command: npm run start
@@ -74,8 +62,6 @@ services:
     restart: always
     volumes:
       - ../mongodb/data:/data/db
-    networks: 
-      - backend
     env_file: ./.database.env
 
   # =============================================  
@@ -93,10 +79,13 @@ services:
       - ../nginx/conf:/etc/nginx/conf.d
       - ../nginx/data/certbot/conf:/etc/letsencrypt
       - ../nginx/data/certbot/www:/var/www/certbot
+      - ../../calendz-front/dist:/var/www/calendz
     ports:
       - "80:80"
       - "443:443"
     command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  
+  # Certbot
   calendz-certbot:
     container_name: calendz-certbot
     hostname: calendz-certbot
