@@ -1,11 +1,5 @@
 version: '3.7'
 
-networks:
-  backend:
-    driver: bridge
-  frontend:
-    driver: bridge
-
 services:
   # =============================================  
   # == CALENDZ-API-CALENDAR  
@@ -19,9 +13,6 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3000:3000"
-    networks: 
-      - frontend
-      - backend
     depends_on:
       - calendz-database
     command: npm run start
@@ -39,30 +30,10 @@ services:
       - /usr/src/app/node_modules
     ports:
       - "3001:3001"
-    networks:
-      - frontend
-      - backend
     depends_on:
       - calendz-database
     command: npm run start
     env_file: ./.api.env
-
-  # =============================================  
-  # == CALENDZ-FRONT  
-  # =============================================  
-  calendz-front:
-    container_name: calendz-front
-    hostname: calendz-front
-    image: calendz/front:latest
-    restart: "no"
-    volumes:
-      - ../../calendz-front:/usr/src/app
-      - /usr/src/app/node_modules
-    depends_on:
-      - calendz-api
-      - calendz-api-calendar
-    command: npm run build
-    env_file: ./.front.env
 
   # =============================================  
   # == CALENDZ-DATABASE  
@@ -74,35 +45,4 @@ services:
     restart: always
     volumes:
       - ../mongodb/data:/data/db
-    networks: 
-      - backend
     env_file: ./.database.env
-
-  # =============================================  
-  # == CALENDZ-NGINX
-  # =============================================
-  calendz-nginx:
-    container_name: calendz-nginx
-    hostname: calendz-nginx
-    build:
-      context: ../nginx
-      dockerfile: Dockerfile
-    image: calendz/nginx:latest
-    restart: always
-    volumes:
-      - ../nginx/conf:/etc/nginx/conf.d
-      - ../nginx/data/certbot/conf:/etc/letsencrypt
-      - ../nginx/data/certbot/www:/var/www/certbot
-    ports:
-      - "80:80"
-      - "443:443"
-    command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
-  calendz-certbot:
-    container_name: calendz-certbot
-    hostname: calendz-certbot
-    image: certbot/certbot
-    restart: unless-stopped
-    volumes:
-      - ../nginx/data/certbot/conf:/etc/letsencrypt
-      - ../nginx/data/certbot/www:/var/www/certbot
-    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
