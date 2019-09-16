@@ -8,7 +8,7 @@ services:
       context: ../../calendz-api-calendar/
       dockerfile: Dockerfile
     image: calendz-api-calendar:1.0.0
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - ../../calendz-api-calendar:/usr/src/app
       - /usr/src/app/node_modules
@@ -25,7 +25,7 @@ services:
       context: ../../calendz-api/
       dockerfile: Dockerfile
     image: calendz-api:1.0.0
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - ../../calendz-api:/usr/src/app
       - /usr/src/app/node_modules
@@ -39,7 +39,7 @@ services:
     container_name: calendz-database
     hostname: calendz-database
     image: mongo:3.6
-    restart: on-failure
+    restart: unless-stopped
     ports:
       - "27017:27017"
     environment:
@@ -54,7 +54,7 @@ services:
       context: ../../calendz-front
       dockerfile: Dockerfile
     image: calendz-front:1.0.0
-    restart: on-failure
+    restart: unless-stopped
     volumes:
       - ../../calendz-front:/usr/src/app
       - /usr/src/app/node_modules
