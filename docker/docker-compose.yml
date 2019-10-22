@@ -25,6 +25,7 @@ services:
       - backend
     depends_on:
       - calendz-database
+      - calendz-redis
     command: npm run dev
 
   calendz-api:
@@ -80,3 +81,14 @@ services:
       - calendz-api
       - calendz-api-calendar
     command: npm run serve
+
+  calendz-redis:
+    container_name: calendz-redis
+    hostname: calendz-redis
+    image: redis:5.0.6-alpine3.10
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    networks: 
+      - backend
+    command: redis-server --requirepass imasecret
