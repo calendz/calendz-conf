@@ -91,4 +91,4 @@ services:
       - "6379:6379"
     networks: 
       - backend
-    command: redis-server --requirepass imasecret
+    command: redis-server --requirepass ${REDIS_PASSWORD}
