@@ -19,12 +19,11 @@ services:
       - ../../calendz-api-calendar:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - "3000:3000"
+      - "3000:3333"
     networks: 
       - frontend
       - backend
     depends_on:
-      - calendz-database
       - calendz-redis
     command: npm run dev
 

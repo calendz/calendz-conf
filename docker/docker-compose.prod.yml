@@ -12,11 +12,9 @@ services:
     volumes:
       - /usr/src/app/node_modules
     ports:
-      - "3000:3000"
+      - "3000:3333"
     depends_on:
-      - calendz-database
       - calendz-redis
-      - calendz-api
     command: npm run start
     env_file: ./.api-calendar.env
 
