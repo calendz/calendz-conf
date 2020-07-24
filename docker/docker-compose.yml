@@ -90,4 +90,4 @@ services:
       - "6379:6379"
     networks: 
       - backend
-    command: redis-server --requirepass password
+    command: redis-server
