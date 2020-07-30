@@ -13,7 +13,7 @@ services:
     build:
       context: ../../calendz-api-calendar/
       dockerfile: Dockerfile
-    image: calendz-api-calendar:1.0.0
+    image: calendz-api-calendar:latest
     restart: on-failure
     volumes:
       - ../../calendz-api-calendar:/usr/src/app
@@ -33,7 +33,7 @@ services:
     build:
       context: ../../calendz-api/
       dockerfile: Dockerfile
-    image: calendz-api:1.0.0
+    image: calendz-api:latest
     restart: on-failure
     volumes:
       - ../../calendz-api:/usr/src/app
@@ -67,7 +67,7 @@ services:
     build:
       context: ../../calendz-front
       dockerfile: Dockerfile
-    image: calendz-front:1.0.0
+    image: calendz-front:latest
     restart: on-failure
     volumes:
       - ../../calendz-front:/usr/src/app
