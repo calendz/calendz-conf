@@ -7,16 +7,14 @@ services:
   calendz-api-calendar:
     container_name: calendz-api-calendar
     hostname: calendz-api-calendar
-    image: calendz/api-calendar:latest
+    image: calendz/api-calendar:current
     restart: always
     volumes:
       - /usr/src/app/node_modules
     ports:
-      - "3000:3000"
+      - "3000:3333"
     depends_on:
-      - calendz-database
       - calendz-redis
-      - calendz-api
     command: npm run start
     env_file: ./.api-calendar.env
 
@@ -26,7 +24,7 @@ services:
   calendz-api:
     container_name: calendz-api
     hostname: calendz-api
-    image: calendz/api:latest
+    image: calendz/api:current
     restart: always
     volumes:
       - /usr/src/app/node_modules
