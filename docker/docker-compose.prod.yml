@@ -7,7 +7,7 @@ services:
   calendz-api-calendar:
     container_name: calendz-api-calendar
     hostname: calendz-api-calendar
-    image: calendz/api-calendar:latest
+    image: calendz/api-calendar:current
     restart: always
     volumes:
       - /usr/src/app/node_modules
@@ -24,7 +24,7 @@ services:
   calendz-api:
     container_name: calendz-api
     hostname: calendz-api
-    image: calendz/api:latest
+    image: calendz/api:current
     restart: always
     volumes:
       - /usr/src/app/node_modules
